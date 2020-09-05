@@ -1,0 +1,35 @@
+<h1>チャット</h1>
+
+<div class="row">
+    <aside class="col-sm-4">
+      <%= form_with(model: @chat, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 5 %>
+        </div>
+        <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </aside>
+    <div class="col-sm-8">
+      <ul class="list-unstyled">
+        <% @chats.each do |chat| %>
+          <li class="media mb-3">
+            <img class="mr-2 rounded" src="<%= gravatar_url(chat.user, { size: 50 }) %>" alt="">
+              <div class="media-body">
+                <div>
+                  <%= link_to chat.user.name, user_path(chat.user) %> <span class="text-muted">posted at <%= chat.created_at %></span>
+                </div>
+                <div>
+                  <p><%= chat.content %></p>
+                </div>
+                <div>
+                  <% if current_user == chat.user %>
+                    <%= link_to "削除", chat, method: :delete, data: {confirm: "You sure?" }, class: "btn btn-danger btn-sm" %>
+                  <% end %>
+                </div>
+              </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>  
+</div>

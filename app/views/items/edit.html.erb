@@ -1,0 +1,13 @@
+<h1>商品編集ページ</h1>
+
+<%= form_with(model: @item, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  
+  <%= f.label :image, "画像をアップロード" %>
+  <%= f.file_field :image %>
+  
+  <%= f.label :content, "商品説明" %>
+  <%= f.text_area :content, class: "form-control", rows: 10 %>
+  
+  <%= f.submit "投稿", class: "btn btn-primary btn-block" %>
+ <% end %>
