@@ -7,5 +7,5 @@ class Item < ApplicationRecord
   
   validates :image, presence: true
   
-  has_many :chats
+  has_many :chats, dependent: :destroy
 end
